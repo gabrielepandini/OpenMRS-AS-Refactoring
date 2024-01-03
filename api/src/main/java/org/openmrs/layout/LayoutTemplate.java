@@ -69,7 +69,7 @@ public abstract class LayoutTemplate {
 	public abstract String getNonLayoutToken();
 	
 	private String replaceTokens(String line) {
-		LayoutSupport<?> as = getLayoutSupportInstance();
+		ALayoutSupport as = getLayoutSupportInstance();
 		List<String> specialTokens = nonUniqueStringsGoLast(as.getSpecialTokens());
 		for (String token : specialTokens) {
 			line = line.replaceAll(token, LAYOUT_TOKEN);
@@ -358,7 +358,7 @@ public abstract class LayoutTemplate {
 		this.sizeMappings = sizeMappings;
 	}
 	
-	public abstract LayoutSupport<?> getLayoutSupportInstance();
+	public abstract ALayoutSupport getLayoutSupportInstance();
 	
 	public List<String> nonUniqueStringsGoLast(List<String> strListArg) {
 		List<String> dup = new ArrayList<>();

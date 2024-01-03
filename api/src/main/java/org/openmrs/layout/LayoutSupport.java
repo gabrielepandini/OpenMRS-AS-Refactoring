@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @since 1.12
  */
-public abstract class LayoutSupport<T extends LayoutTemplate> {
+public abstract class LayoutSupport<T extends LayoutTemplate> extends ALayoutSupport{
 	
 	private static final Logger log = LoggerFactory.getLogger(LayoutSupport.class);
 	
@@ -123,13 +123,6 @@ public abstract class LayoutSupport<T extends LayoutTemplate> {
 			log.debug("No Layout Templates defined");
 			return null;
 		}
-	}
-	
-	/**
-	 * @return Returns the specialTokens.
-	 */
-	public List<String> getSpecialTokens() {
-		return specialTokens;
 	}
 	
 	/**
