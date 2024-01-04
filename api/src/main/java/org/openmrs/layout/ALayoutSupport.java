@@ -11,4 +11,12 @@ public abstract class ALayoutSupport {
 	public List<String> getSpecialTokens() {
 		return specialTokens;
 	}
+
+	/**
+	 * @param specialTokens The specialTokens to set.
+	 */
+	public void setSpecialTokens(List<String> specialTokens) {
+		this.specialTokens = specialTokens;
+	}
+
 }

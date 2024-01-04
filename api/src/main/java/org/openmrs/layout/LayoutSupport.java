@@ -25,8 +25,6 @@ public abstract class LayoutSupport<T extends LayoutTemplate> extends ALayoutSup
 	
 	protected List<T> layoutTemplates;
 	
-	protected List<String> specialTokens;
-	
 	/**
 	 * @return Returns the layoutTemplates.
 	 */
@@ -123,13 +121,6 @@ public abstract class LayoutSupport<T extends LayoutTemplate> extends ALayoutSup
 			log.debug("No Layout Templates defined");
 			return null;
 		}
-	}
-	
-	/**
-	 * @param specialTokens The specialTokens to set.
-	 */
-	public void setSpecialTokens(List<String> specialTokens) {
-		this.specialTokens = specialTokens;
 	}
 	
 	/**
