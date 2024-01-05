@@ -7,7 +7,7 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.web.filter.initialization;
+package org.openmrs.web.filter.update;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -48,7 +48,6 @@ import org.openmrs.api.UserService;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.context.ContextAuthenticationException;
 import org.openmrs.api.context.UsernamePasswordCredentials;
-import org.openmrs.api.impl.UserServiceImpl;
 import org.openmrs.liquibase.ChangeLogDetective;
 import org.openmrs.liquibase.ChangeLogVersionFinder;
 import org.openmrs.module.MandatoryModuleException;
@@ -68,7 +67,9 @@ import org.openmrs.web.Listener;
 import org.openmrs.web.WebConstants;
 import org.openmrs.web.WebDaemon;
 import org.openmrs.web.filter.StartupFilter;
-import org.openmrs.web.filter.update.UpdateFilter;
+import org.openmrs.web.filter.initialization.DatabaseDetective;
+import org.openmrs.web.filter.initialization.InitializationWizardModel;
+import org.openmrs.web.filter.initialization.WizardTask;
 import org.openmrs.web.filter.util.CustomResourceLoader;
 import org.openmrs.web.filter.util.ErrorMessageConstants;
 import org.openmrs.web.filter.util.FilterUtil;
@@ -182,14 +183,9 @@ public class InitializationFilter extends StartupFilter {
 	
 	// the actual driver loaded by the DatabaseUpdater class
 	private String loadedDriverString;
-	
-	/**
-	 * Variable set at the end of the wizard when spring is being restarted
-	 */
-	private static boolean initializationComplete = false;
-	
+
 	protected synchronized void setInitializationComplete(boolean initializationComplete) {
-		InitializationFilter.initializationComplete = initializationComplete;
+		InitializationFilter2.initializationComplete = initializationComplete;
 	}
 	
 	/**
@@ -231,10 +227,10 @@ public class InitializationFilter extends StartupFilter {
 					errors.putAll(initJob.getErrors());
 				}
 				
-				result.put("initializationComplete", isInitializationComplete());
+				result.put("initializationComplete", InitializationFilter2.isInitializationComplete());
 				result.put("message", initJob.getMessage());
 				result.put("actionCounter", initJob.getStepsComplete());
-				if (!isInitializationComplete()) {
+				if (!InitializationFilter2.isInitializationComplete()) {
 					result.put("executingTask", initJob.getExecutingTask());
 					result.put("executedTasks", initJob.getExecutedTasks());
 					result.put("completedPercentage", initJob.getCompletedPercentage());
@@ -1046,18 +1042,9 @@ public class InitializationFilter extends StartupFilter {
 		// If progress.vm makes an ajax request even immediately after initialization has completed
 		// let the request pass in order to let progress.vm load the start page of OpenMRS
 		// (otherwise progress.vm is displayed "forever")
-		return !PROGRESS_VM_AJAXREQUEST.equals(httpRequest.getParameter("page")) && !initializationRequired();
+		return !PROGRESS_VM_AJAXREQUEST.equals(httpRequest.getParameter("page")) && !InitializationFilter2.initializationRequired();
 	}
-	
-	/**
-	 * Public method that returns true if database+runtime properties initialization is required
-	 *
-	 * @return true if this initialization wizard needs to run
-	 */
-	public static boolean initializationRequired() {
-		return !isInitializationComplete();
-	}
-	
+
 	/**
 	 * @param isInstallationStarted the value to set
 	 */
@@ -1211,17 +1198,7 @@ public class InitializationFilter extends StartupFilter {
 		
 		return -1;
 	}
-	
-	/**
-	 * Convenience variable to know if this wizard has completed successfully and that this wizard does
-	 * not need to be executed again
-	 *
-	 * @return true if this has been run already
-	 */
-	private static synchronized boolean isInitializationComplete() {
-		return initializationComplete;
-	}
-	
+
 	/**
 	 * Check if the given value is null or a zero-length String
 	 *

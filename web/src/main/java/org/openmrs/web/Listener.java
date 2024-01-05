@@ -28,7 +28,7 @@ import org.openmrs.util.OpenmrsClassLoader;
 import org.openmrs.util.OpenmrsConstants;
 import org.openmrs.util.OpenmrsUtil;
 import org.openmrs.web.filter.initialization.DatabaseDetective;
-import org.openmrs.web.filter.initialization.InitializationFilter;
+import org.openmrs.web.filter.update.InitializationFilter;
 import org.openmrs.web.filter.update.UpdateFilter;
 import org.owasp.csrfguard.CsrfGuard;
 import org.owasp.csrfguard.CsrfGuardServletContextListener;

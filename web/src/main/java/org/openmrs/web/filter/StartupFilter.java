@@ -57,7 +57,7 @@ import org.openmrs.util.LocaleUtility;
 import org.openmrs.util.OpenmrsUtil;
 import org.openmrs.web.Listener;
 import org.openmrs.web.WebConstants;
-import org.openmrs.web.filter.initialization.InitializationFilter;
+import org.openmrs.web.filter.update.InitializationFilter;
 import org.openmrs.web.filter.update.UpdateFilter;
 import org.openmrs.web.filter.util.FilterUtil;
 import org.openmrs.web.filter.util.LocalizationTool;

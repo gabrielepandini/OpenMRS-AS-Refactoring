@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.openmrs.util.OpenmrsConstants;
 import org.openmrs.web.WebConstants;
+import org.openmrs.web.filter.update.InitializationFilter;
 
 /**
  * The {@link InitializationFilter} uses this model object to hold all properties that are edited by

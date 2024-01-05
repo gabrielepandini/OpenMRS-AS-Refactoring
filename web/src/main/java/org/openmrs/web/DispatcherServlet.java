@@ -17,7 +17,7 @@ import org.openmrs.module.ModuleFactory;
 import org.openmrs.module.web.WebModuleUtil;
 import org.openmrs.util.DatabaseUpdater;
 import org.openmrs.util.OpenmrsClassLoader;
-import org.openmrs.web.filter.initialization.InitializationFilter;
+import org.openmrs.web.filter.update.InitializationFilter2;
 import org.openmrs.web.filter.update.UpdateFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,7 +85,7 @@ public class DispatcherServlet extends org.springframework.web.servlet.Dispatche
 		if (UpdateFilter.updatesRequired() && !DatabaseUpdater.allowAutoUpdate()) {
 			log.info("DB updates are required, the update wizard must be run");
 		}
-		if (InitializationFilter.initializationRequired()) {
+		if (InitializationFilter2.initializationRequired()) {
 			log.info("Runtime properties were not found or the database is empty, so initialization is required");
 		}
 	}

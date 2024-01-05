@@ -20,7 +20,7 @@ servlets in our web.xml.  That web.xml stops any kind of spring startup if the u
 initialization, db updating, or if there was an error.
 
 See 
-org.openmrs.web.filter.initialization.InitializationFilter.java
+org.openmrs.web.filter.update.InitializationFilter.java
 org.openmrs.web.filter.update.UpdateFilter.java
 org.openmrs.web.filter.startuperror.StartupErrorFilter.java
 

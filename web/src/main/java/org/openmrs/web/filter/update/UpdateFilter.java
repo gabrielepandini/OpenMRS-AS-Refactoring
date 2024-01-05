@@ -26,7 +26,6 @@ import org.openmrs.util.Security;
 import org.openmrs.web.Listener;
 import org.openmrs.web.WebDaemon;
 import org.openmrs.web.filter.StartupFilter;
-import org.openmrs.web.filter.initialization.InitializationFilter;
 import org.openmrs.web.filter.util.CustomResourceLoader;
 import org.openmrs.web.filter.util.ErrorMessageConstants;
 import org.openmrs.web.filter.util.FilterUtil;
@@ -491,7 +490,7 @@ public class UpdateFilter extends StartupFilter {
 		
 		log.debug("Initializing the UpdateFilter");
 		
-		if (!InitializationFilter.initializationRequired()
+		if (!InitializationFilter2.initializationRequired()
 		        || (Listener.isSetupNeeded() && Listener.runtimePropertiesFound())) {
 			updateFilterModel = new UpdateFilterModel();
 			/*
