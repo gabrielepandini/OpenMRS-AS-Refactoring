@@ -23,7 +23,7 @@ public class CohortMembership extends BaseChangeableOpenmrsData implements Compa
 
 	private Integer cohortMemberId;
 	
-	private Cohort cohort;
+	private ICohort cohort;
 	
 	private Integer patientId;
 	
@@ -77,11 +77,11 @@ public class CohortMembership extends BaseChangeableOpenmrsData implements Compa
 		this.cohortMemberId = cohortMemberId;
 	}
 	
-	public Cohort getCohort() {
+	public ICohort getCohort() {
 		return cohort;
 	}
 	
-	public void setCohort(Cohort cohort) {
+	public void setCohort(ICohort cohort) {
 		this.cohort = cohort;
 	}
 	

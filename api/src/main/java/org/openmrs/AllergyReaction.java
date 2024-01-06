@@ -18,11 +18,10 @@ import org.openmrs.util.OpenmrsUtil;
 public class AllergyReaction extends BaseOpenmrsObject implements java.io.Serializable{
 	
 	public static final long serialVersionUID = 1;
-
-
+	
 	private Integer allergyReactionId;
 	
-	private Allergy allergy;
+	private IAllergy allergy;
 	
 	private Concept reaction;
 	
@@ -40,7 +39,7 @@ public class AllergyReaction extends BaseOpenmrsObject implements java.io.Serial
 	 * @param reaction the reaction to set
 	 * @param reactionNonCoded the reactionNonCoded to set
 	 */
-	public AllergyReaction(Allergy allergy, Concept reaction, String reactionNonCoded) {
+	public AllergyReaction(IAllergy allergy, Concept reaction, String reactionNonCoded) {
 		this.allergy = allergy;
 		this.reaction = reaction;
 		this.reactionNonCoded = reactionNonCoded;
@@ -73,14 +72,14 @@ public class AllergyReaction extends BaseOpenmrsObject implements java.io.Serial
 	/**
 	 * @return Returns the allergy
 	 */
-	public Allergy getAllergy() {
+	public IAllergy getAllergy() {
 		return allergy;
 	}
 	
 	/**
 	 * @param allergy the allergy to set
 	 */
-	public void setAllergy(Allergy allergy) {
+	public void setAllergy(IAllergy allergy) {
 		this.allergy = allergy;
 	}
 	

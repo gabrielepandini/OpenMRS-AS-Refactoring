@@ -207,7 +207,7 @@ public class CohortServiceImpl extends BaseOpenmrsService implements CohortServi
 	 */
 	@Override
 	public void purgeCohortMembership(CohortMembership cohortMembership) throws APIException {
-		Cohort cohort = cohortMembership.getCohort();
+		Cohort cohort = (Cohort) cohortMembership.getCohort();
 		boolean removed = cohort.removeMembership(cohortMembership);
 		if (removed) {
 			Context.getCohortService().saveCohort(cohort);
@@ -219,7 +219,7 @@ public class CohortServiceImpl extends BaseOpenmrsService implements CohortServi
 	 */
 	@Override
 	public CohortMembership voidCohortMembership(CohortMembership cohortMembership, String reason) {
-		Context.getCohortService().saveCohort(cohortMembership.getCohort());
+		Context.getCohortService().saveCohort((Cohort) cohortMembership.getCohort());
 		return cohortMembership;
 	}
 	
@@ -229,7 +229,7 @@ public class CohortServiceImpl extends BaseOpenmrsService implements CohortServi
 	@Override
 	public CohortMembership endCohortMembership(CohortMembership cohortMembership, Date onDate) {
 		cohortMembership.setEndDate(onDate == null ? new Date() : onDate);
-		Context.getCohortService().saveCohort(cohortMembership.getCohort());
+		Context.getCohortService().saveCohort((Cohort) cohortMembership.getCohort());
 		return cohortMembership;
 	}
 	

@@ -567,7 +567,7 @@ public class CohortServiceTest extends BaseContextSensitiveTest {
 		executeDataSet(COHORT_XML);
 		
 		CohortMembership toPurge = service.getCohortMembershipByUuid("v9a9m5i6-17e6-407c-9d4v-hbi8teu9lf0f");
-		Cohort owner = toPurge.getCohort();
+		Cohort owner = (Cohort) toPurge.getCohort();
 		service.purgeCohortMembership(toPurge);
 		
 		Context.flushSession();
@@ -792,7 +792,7 @@ public class CohortServiceTest extends BaseContextSensitiveTest {
 		executeDataSet(COHORT_XML);
 		List<CohortMembership> memberships = service.getCohortMemberships(6, new Date(), false);
 		assertThat(memberships.size(), is(1));
-		assertThat(memberships.get(0).getCohort().getCohortId(), is(2));
+		assertThat(((Cohort) memberships.get(0).getCohort()).getCohortId(), is(2));
 	}
 	
 	@Test
@@ -815,8 +815,8 @@ public class CohortServiceTest extends BaseContextSensitiveTest {
 
 		boolean foundVoidedCohortMembership = false;
 		for (CohortMembership cm : memberships) {
-			if (cm.getCohort().getCohortId().equals(1)) {
-				assertTrue(cm.getCohort().getVoided());
+			if (((Cohort) cm.getCohort()).getCohortId().equals(1)) {
+				assertTrue(((Cohort) cm.getCohort()).getVoided());
 				foundVoidedCohortMembership = true;
 				break;
 			}

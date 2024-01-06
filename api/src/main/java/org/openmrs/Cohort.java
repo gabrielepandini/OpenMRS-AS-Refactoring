@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 /**
  * This class represents a list of patientIds.
  */
-public class Cohort extends BaseChangeableOpenmrsData {
+public class Cohort extends BaseChangeableOpenmrsData implements ICohort {
 	
 	public static final long serialVersionUID = 0L;
 	
