@@ -32,7 +32,7 @@ public class FormField extends BaseChangeableOpenmrsMetadata implements java.io.
 	
 	protected FormField parent;
 	
-	protected Form form;
+	protected IForm form;
 	
 	protected Field field;
 	
@@ -94,14 +94,14 @@ public class FormField extends BaseChangeableOpenmrsMetadata implements java.io.
 	/**
 	 * @return Returns the form.
 	 */
-	public Form getForm() {
+	public IForm getForm() {
 		return form;
 	}
 	
 	/**
 	 * @param form The form to set.
 	 */
-	public void setForm(Form form) {
+	public void setForm(IForm form) {
 		this.form = form;
 	}
 	

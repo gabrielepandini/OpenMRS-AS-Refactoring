@@ -19,7 +19,7 @@ import java.util.Set;
  *
  * @version 1.0
  */
-public class Form extends BaseChangeableOpenmrsMetadata {
+public class Form extends BaseChangeableOpenmrsMetadata implements IForm {
 	
 	public static final long serialVersionUID = 845634L;
 	

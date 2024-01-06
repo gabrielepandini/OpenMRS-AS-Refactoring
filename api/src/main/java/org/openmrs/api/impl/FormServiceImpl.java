@@ -563,7 +563,7 @@ public class FormServiceImpl extends BaseOpenmrsService implements FormService {
 				if (sHandler.getFormFields() != null) {
 					for (FormField ff : sHandler.getFormFields()) {
 						ff.setParent(tmpFormField);
-						ff.setForm(tmpFormField.getForm());
+						ff.setForm((Form) tmpFormField.getForm());
 						ff.setCreator(tmpFormField.getCreator());
 						ff.setDateCreated(tmpFormField.getDateCreated());
 						dao.saveFormField(ff);
