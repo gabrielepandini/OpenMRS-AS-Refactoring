@@ -10,13 +10,7 @@
 package org.openmrs.logic.datasource;
 
 import java.util.Collection;
-import java.util.Map;
 
-import org.openmrs.Cohort;
-import org.openmrs.logic.LogicContext;
-import org.openmrs.logic.LogicCriteria;
-import org.openmrs.logic.LogicException;
-import org.openmrs.logic.result.Result;
 
 /**
  * Provides data to the logic service engine. Each data source is responsible for exposing a set of
@@ -88,17 +82,6 @@ public interface LogicDataSource {
 	 *     public static final String NAME = "person";
 	 */
 	public static String NAME = "org.openmrs.logic.LogicDataSource.name";
-	
-	/**
-	 * Extracts data from the data source. Actually, this function only checks for cached data and
-	 * forwards all non-cached requests to its subclass(es).
-	 * 
-	 * @param context the current logic context
-	 * @param patients Cohort of Patient(s) for whom to perform the queries
-	 * @param criteria <code>LogicCriteria</code> identifying which data is to be extracted
-	 * @return <code>Map</code> of results for each patient, grouped by requested data element
-	 */
-	public Map<Integer, Result> read(LogicContext context, Cohort patients, LogicCriteria criteria) throws LogicException;
 	
 	public abstract Collection<String> getKeys();
 	

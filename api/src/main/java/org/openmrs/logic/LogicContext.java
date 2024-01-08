@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
+import org.openmrs.Cohort;
 import org.openmrs.Patient;
 import org.openmrs.logic.datasource.LogicDataSource;
 import org.openmrs.logic.result.Result;
@@ -29,7 +30,19 @@ public interface LogicContext {
 	 * @return patient object
 	 */
 	public Patient getPatient(Integer patientId);
-	
+
+	/**
+	 * Extracts data from the data source. Actually, this function only checks for cached data and
+	 * forwards all non-cached requests to its subclass(es).
+	 *
+	 * @param context the current logic context
+	 * @param patients Cohort of Patient(s) for whom to perform the queries
+	 * @param criteria <code>LogicCriteria</code> identifying which data is to be extracted
+	 * @return <code>Map</code> of results for each patient, grouped by requested data element
+	 */
+	public Map<Integer, Result> read(LogicContext context, Cohort patients, LogicCriteria criteria) throws LogicException;
+
+
 	/**
 	 * Evaluate a rule for a single patient
 	 * 

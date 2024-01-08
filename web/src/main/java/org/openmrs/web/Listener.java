@@ -11,12 +11,10 @@ package org.openmrs.web;
 
 import org.apache.logging.log4j.LogManager;
 import org.openmrs.api.context.Context;
+import org.openmrs.api.context.Daemon;
 import org.openmrs.logging.OpenmrsLoggingUtil;
-import org.openmrs.module.MandatoryModuleException;
+import org.openmrs.module.*;
 import org.openmrs.module.Module;
-import org.openmrs.module.ModuleFactory;
-import org.openmrs.module.ModuleMustStartException;
-import org.openmrs.module.OpenmrsCoreModuleException;
 import org.openmrs.module.web.OpenmrsJspServlet;
 import org.openmrs.module.web.WebModuleUtil;
 import org.openmrs.scheduler.SchedulerUtil;
@@ -255,7 +253,7 @@ public final class Listener extends ContextLoader implements ServletContextListe
 				configureAndRefreshWebApplicationContext(context, servletContext);
 				servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, context);
 				
-				WebDaemon.startOpenmrs(event.getServletContext());
+				new WebDaemon().startOpenmrs(event.getServletContext());
 			} else {
 				setupNeeded = true;
 			}
@@ -793,6 +791,55 @@ public final class Listener extends ContextLoader implements ServletContextListe
 		}
 		
 		return null;
+	}
+
+	class WebDaemon extends Daemon {
+
+		/**
+		 * Start openmrs in a new thread that is authenticated as the daemon user.
+		 *
+		 * @param servletContext the servlet context.
+		 */
+		public void startOpenmrs(final ServletContext servletContext) throws DatabaseUpdateException,
+			InputRequiredException {
+
+			// create a new thread and start openmrs in it.
+			DaemonThread startOpenmrsThread = new DaemonThread() {
+
+				@Override
+				public void run() {
+					isDaemonThread.set(true);
+					try {
+						Listener.startOpenmrs(servletContext);
+					}
+					catch (Exception e) {
+						exceptionThrown = e;
+					}
+					finally {
+						try {
+							Context.closeSession();
+						} finally {
+							isDaemonThread.remove();
+						}
+					}
+				}
+			};
+
+			startOpenmrsThread.start();
+
+			// wait for the "startOpenmrs" thread to finish
+			try {
+				startOpenmrsThread.join();
+			}
+			catch (InterruptedException e) {
+				// ignore
+			}
+
+			if (startOpenmrsThread.getExceptionThrown() != null) {
+				throw new ModuleException("Unable to start OpenMRS. Error thrown was: "
+					+ startOpenmrsThread.getExceptionThrown().getMessage(), startOpenmrsThread.getExceptionThrown());
+			}
+		}
 	}
 	
 }
