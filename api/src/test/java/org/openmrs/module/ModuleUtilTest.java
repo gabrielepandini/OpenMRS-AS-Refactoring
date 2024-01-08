@@ -134,251 +134,251 @@ public class ModuleUtilTest extends BaseContextSensitiveTest {
 	}
 
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldAllowRangedRequiredVersion() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.2.3 - 1.4.4";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldAllowRangedRequiredVersionWithWildCard() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.2.* - 1.4.*";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldAllowRangedRequiredVersionWithWildCardOnOneEnd() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.2.3 - 1.4.*";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 		requiredOpenmrsVersion = "1.4.* - 1.4.5";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldAllowSingleEntryForRequiredVersion() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.4.2";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldAllowRequiredVersionWithWildCard() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.4.*";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldAllowNonNumericCharacterRequiredVersion() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.4.3a";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldAllowRangedNonNumericCharacterRequiredVersion() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.4.1a - 1.4.3a";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldAllowRangedNonNumericCharacterWithWildCard() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.3.*a - 1.4.*a";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldAllowRangedNonNumericCharacterWithWildCardOnOneEnd() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.2.3 - 1.4.*a";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 		requiredOpenmrsVersion = "1.4.*a - 1.4.5a";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldReturnFalseWhenOpenmrsVersionBeyondWildCardRange() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.3.*";
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 		requiredOpenmrsVersion = "1.5.*";
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldReturnFalseWhenRequiredVersionBeyondOpenmrsVersion() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.5.*";
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldReturnFalseWhenRequiredVersionWithWildCardBeyondOpenmrsVersion()
 	{
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.5.* - 1.6.*";
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldReturnFalseWhenRequiredVersionWithWildCardOnOneEndBeyondOpenmrsVersion()
 	{
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.4.5 - 1.5.*";
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 		requiredOpenmrsVersion = "1.5.* - 1.6.0";
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldReturnFalseWhenSingleEntryRequiredVersionBeyondOpenmrsVersion() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.5.0";
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldAllowReleaseTypeInTheVersion() {
 		String openmrsVersion = "1.4.3";
 		String requiredOpenmrsVersion = "1.4.1-dev - 1.5.*-alpha";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 		requiredOpenmrsVersion = "1.5.*-dev - 1.6.0-dev";
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredOpenmrsVersion));
 	}
 	
 	/**
-	 * @see ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldMatchWhenRevisionNumberIsBelowMaximumRevisionNumber() {
 		String openmrsVersion = "1.4.1111";
 		String requiredVersion = "1.4.*";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredVersion));
 	}
 	
 	/**
-	 * @see ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldNotMatchWhenRevisionNumberIsAboveMaximumRevisionNumber() {
 		Long revisionNumber = (long) Integer.MAX_VALUE + 2;
 		String openmrsVersion = "1.4." + revisionNumber;
 		String requiredVersion = "1.4.*";
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredVersion));
 	}
 	
 	/**
-	 * @see ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldNotMatchWhenVersionHasWildCardAndIsOutsideBoundary() {
 		String openmrsVersion = "1.*.4";
 		String requiredVersion = "1.4.0 - 1.4.10";
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredVersion));
 	}
 	
 	/**
-	 * @see ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldMatchWhenVersionHasWildCardAndIsWithinBoundary() {
 		String openmrsVersion = "1.4.*";
 		String requiredVersion = "1.4.0 - 1.4.10";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredVersion));
 	}
 	
 	/**
-	 * @see ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldNotMatchWhenVersionHasWildPlusQualifierCardAndIsOutsideBoundary() {
 		String openmrsVersion = "1.*.4-SNAPSHOT";
 		String requiredVersion = "1.4.0 - 1.4.10";
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredVersion));
 	}
 	
 	/**
-	 * @see ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldMatchWhenVersionHasWildCardPlusQualifierAndIsWithinBoundary() {
 		String openmrsVersion = "1.4.*-SNAPSHOT";
 		String requiredVersion = "1.4.0 - 1.4.10";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredVersion));
 	}
 	
 	/**
-	 * @see ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldReturnTrueWhenRequiredVersionIsEmpty() {
 		String openmrsVersion = "1.11.4";
 		String requiredVersion = "";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredVersion));
 	}
 	
 	/**
-	 * @see ModuleUtil#matchRequiredVersions(String,String)
+	 * @see ModuleUtil2#matchRequiredVersions(String, String)
 	 */
 	@Test
 	public void matchRequiredVersions_shouldCorrectlySetUpperAndLoweLimitForVersionRangeWithQualifiersAndWildCard() {
 		String openmrsVersion = "1.4.11111";
 		String requiredVersion = "1.4.200 - 1.4.*-SNAPSHOT";
 		Long revisionNumber = (long) Integer.MAX_VALUE + 2;
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredVersion));
 		requiredVersion = "1.4.*-SNAPSHOT - 1.4.*";
-		assertTrue(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredVersion));
+		assertTrue(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredVersion));
 		openmrsVersion = "1.4." + revisionNumber;
-		assertFalse(ModuleUtil.matchRequiredVersions(openmrsVersion, requiredVersion));
+		assertFalse(ModuleUtil2.matchRequiredVersions(openmrsVersion, requiredVersion));
 	}
 	
 	/**
@@ -486,25 +486,25 @@ public class ModuleUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#compareVersion(String,String)
+	 * @see ModuleUtil2#compareVersion(String, String)
 	 */
 	@Test
 	public void compareVersion_shouldCorrectlyComparingTwoVersionNumbers() {
 		String olderVersion = "2.1.1";
 		String newerVersion = "2.1.10";
-		assertTrue(ModuleUtil.compareVersion(olderVersion, newerVersion) < 0);
+		assertTrue(ModuleUtil2.compareVersion(olderVersion, newerVersion) < 0);
 	}
 	
 	/**
-	 * @see org.openmrs.module.ModuleUtil#compareVersion(String,String)
+	 * @see ModuleUtil2#compareVersion(String, String)
 	 */
 	@Test
 	public void compareVersion_shouldTreatSNAPSHOTAsEarliestVersion() {
 		String olderVersion = "1.8.3";
 		String newerVersion = "1.8.4-SNAPSHOT";
-		assertTrue(ModuleUtil.compareVersion(newerVersion, olderVersion) > 0);
+		assertTrue(ModuleUtil2.compareVersion(newerVersion, olderVersion) > 0);
 		//should still return the correct value if the arguments are switched
-		assertTrue(ModuleUtil.compareVersion(olderVersion, newerVersion) < 0);
+		assertTrue(ModuleUtil2.compareVersion(olderVersion, newerVersion) < 0);
 	}
 	
 	/**

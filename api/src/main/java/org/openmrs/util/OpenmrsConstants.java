@@ -22,10 +22,8 @@ import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
 import org.openmrs.GlobalProperty;
-import org.openmrs.api.context.Context;
 import org.openmrs.api.handler.ExistingVisitAssignmentHandler;
 import org.openmrs.customdatatype.datatype.BooleanDatatype;
-import org.openmrs.customdatatype.datatype.FreeTextDatatype;
 import org.openmrs.hl7.HL7Constants;
 import org.openmrs.module.ModuleConstants;
 import org.openmrs.module.ModuleFactory;
@@ -1301,10 +1299,7 @@ public final class OpenmrsConstants {
 	
 	//Patient Identifier Validators
 	public static final String LUHN_IDENTIFIER_VALIDATOR = LuhnIdentifierValidator.class.getName();
-	
-	/** The data type to return on failing to load a custom data type. */
-	public static final String DEFAULT_CUSTOM_DATATYPE = FreeTextDatatype.class.getName();
-	
+
 	/**Prefix followed by registered component name.*/
 	public static final String REGISTERED_COMPONENT_NAME_PREFIX = "bean:";
 	

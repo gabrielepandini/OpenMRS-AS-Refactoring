@@ -368,7 +368,7 @@ public class ModuleClassLoader extends URLClassLoader {
 				
 				//openmrsPlatformVersion is optional
 				if (StringUtils.isNotBlank(conditionalResource.getOpenmrsPlatformVersion())) {
-					include = ModuleUtil.matchRequiredVersions(openmrsVersion,
+					include = ModuleUtil2.matchRequiredVersions(openmrsVersion,
 					    conditionalResource.getOpenmrsPlatformVersion());
 					
 					if (!include) {
@@ -388,7 +388,7 @@ public class ModuleClassLoader extends URLClassLoader {
 						} else {
 							String moduleVersion = startedRelatedModules.get(conditionalModuleResource.getModuleId());
 							if (moduleVersion != null) {
-								include = ModuleUtil.matchRequiredVersions(moduleVersion,
+								include = ModuleUtil2.matchRequiredVersions(moduleVersion,
 								    conditionalModuleResource.getVersion());
 								
 								if (!include) {

@@ -13,9 +13,9 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openmrs.module.ModuleUtil2;
 import org.openmrs.module.Module;
 import org.openmrs.module.ModuleFactory;
-import org.openmrs.module.ModuleUtil;
 import org.openmrs.util.OpenmrsConstants;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
@@ -57,7 +57,7 @@ public class OpenmrsProfileExcludeFilter implements TypeFilter {
 		}
 
 		if (StringUtils.isNotBlank((String) openmrsPlatformVersion)
-				&& !ModuleUtil.matchRequiredVersions(OpenmrsConstants.OPENMRS_VERSION_SHORT, (String) openmrsPlatformVersion)) {
+				&& !ModuleUtil2.matchRequiredVersions(OpenmrsConstants.OPENMRS_VERSION_SHORT, (String) openmrsPlatformVersion)) {
 			return false;
 		}
 
@@ -77,7 +77,7 @@ public class OpenmrsProfileExcludeFilter implements TypeFilter {
 				boolean moduleMatched = false;
 				for (Module module : ModuleFactory.getStartedModules()) {
 					if (module.getModuleId().equals(moduleId)
-							&& ModuleUtil.matchRequiredVersions(module.getVersion(), moduleVersion)) {
+							&& ModuleUtil2.matchRequiredVersions(module.getVersion(), moduleVersion)) {
 						moduleMatched = true;
 						break;
 					}

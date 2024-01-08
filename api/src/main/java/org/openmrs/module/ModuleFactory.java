@@ -138,7 +138,7 @@ public class ModuleFactory {
 		
 		Module oldModule = getLoadedModulesMap().get(module.getModuleId());
 		if (oldModule != null) {
-			int versionComparison = ModuleUtil.compareVersion(oldModule.getVersion(), module.getVersion());
+			int versionComparison = ModuleUtil2.compareVersion(oldModule.getVersion(), module.getVersion());
 			if (versionComparison < 0) {
 				// if oldModule version is lower, unload it and use the new
 				unloadModule(oldModule);
@@ -423,7 +423,7 @@ public class ModuleFactory {
 			for (Module mod : getStartedModules()) {
 				if (mod.getPackageName().equals(moduleName)) {
 					String reqVersion = module.getRequiredModuleVersion(moduleName);
-					if (reqVersion == null || ModuleUtil.compareVersion(mod.getVersion(), reqVersion) >= 0) {
+					if (reqVersion == null || ModuleUtil2.compareVersion(mod.getVersion(), reqVersion) >= 0) {
 						started = true;
 					}
 					break;
@@ -906,9 +906,9 @@ public class ModuleFactory {
 			String currentDbVersion = gp.getPropertyValue();
 			if (log.isDebugEnabled()) {
 				log.debug("version:column {}:{}", version, currentDbVersion);
-				log.debug("compare: {}", ModuleUtil.compareVersion(version, currentDbVersion));
+				log.debug("compare: {}", ModuleUtil2.compareVersion(version, currentDbVersion));
 			}
-			if (ModuleUtil.compareVersion(version, currentDbVersion) > 0) {
+			if (ModuleUtil2.compareVersion(version, currentDbVersion) > 0) {
 				executeSQL = true;
 			}
 		} else {
@@ -1440,7 +1440,7 @@ public class ModuleFactory {
 			for (Module mod : getStartedModules()) {
 				if (mod.getPackageName().equals(reqModPackage)) {
 					String reqVersion = module.getRequiredModuleVersion(reqModPackage);
-					if (reqVersion == null || ModuleUtil.compareVersion(mod.getVersion(), reqVersion) >= 0) {
+					if (reqVersion == null || ModuleUtil2.compareVersion(mod.getVersion(), reqVersion) >= 0) {
 						started = true;
 					}
 					break;

@@ -107,11 +107,11 @@ public class UpdateFileParser {
 					Element currentNode = (Element) nodes.item(i);
 					String currentVersion = getElement(currentNode, configVersion, "currentVersion");
 					// if the currently saved version is less than the current tag
-					if (ModuleUtil.compareVersion(this.currentVersion, currentVersion) < 0) {
+					if (ModuleUtil2.compareVersion(this.currentVersion, currentVersion) < 0) {
 						String requireOpenMRSVersion = getElement(currentNode, configVersion, "requireOpenMRSVersion");
 						// if the openmrs code version is compatible, this node is a winner
 						if (requireOpenMRSVersion == null
-						        || ModuleUtil.matchRequiredVersions(OpenmrsConstants.OPENMRS_VERSION_SHORT,
+						        || ModuleUtil2.matchRequiredVersions(OpenmrsConstants.OPENMRS_VERSION_SHORT,
 						            requireOpenMRSVersion)) {
 							this.currentVersion = currentVersion;
 							this.downloadURL = getElement(currentNode, configVersion, "downloadURL");

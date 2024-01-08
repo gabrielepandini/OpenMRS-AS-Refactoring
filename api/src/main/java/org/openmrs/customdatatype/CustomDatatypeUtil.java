@@ -21,8 +21,8 @@ import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
 import org.openmrs.attribute.Attribute;
 import org.openmrs.attribute.AttributeType;
+import org.openmrs.customdatatype.datatype.FreeTextDatatype;
 import org.openmrs.serialization.SerializationException;
-import org.openmrs.util.OpenmrsConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +35,10 @@ public class CustomDatatypeUtil {
 	private CustomDatatypeUtil() {
 	}
 	
+	
 	private static final Logger log = LoggerFactory.getLogger(CustomDatatypeUtil.class);
+
+	public static final String DEFAULT_CUSTOM_DATATYPE = FreeTextDatatype.class.getName();
 	
 	/**
 	 * @param descriptor
@@ -74,7 +77,7 @@ public class CustomDatatypeUtil {
 			return getDatatype(descriptor);
 		}
 		catch (CustomDatatypeException ex) {
-			return getDatatype(OpenmrsConstants.DEFAULT_CUSTOM_DATATYPE, null);
+			return getDatatype(DEFAULT_CUSTOM_DATATYPE, null);
 		}
 	}
 	

@@ -30,7 +30,7 @@ public class VersionComparator implements Comparator<String>, Serializable {
 	 */
 	@Override
 	public int compare(String o1, String o2) {
-		return ModuleUtil.compareVersion(o1, o2);
+		return ModuleUtil2.compareVersion(o1, o2);
 	}
 	
 }
