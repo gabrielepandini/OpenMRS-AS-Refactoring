@@ -14,10 +14,7 @@ import javax.persistence.MappedSuperclass;
 
 import org.hibernate.search.annotations.Field;
 import org.openmrs.BaseChangeableOpenmrsData;
-import org.openmrs.customdatatype.CustomDatatypeUtil;
-import org.openmrs.customdatatype.Customizable;
-import org.openmrs.customdatatype.InvalidCustomValueException;
-import org.openmrs.customdatatype.NotYetPersistedException;
+import org.openmrs.customdatatype.*;
 import org.openmrs.util.OpenmrsUtil;
 
 /**
@@ -111,7 +108,7 @@ public abstract class BaseAttribute<AT extends AttributeType, OwningType extends
 	@Override
 	public Object getValue() throws InvalidCustomValueException {
 		if (value == null) {
-			value = CustomDatatypeUtil.getDatatype(getAttributeType()).fromReferenceString(getValueReference());
+			value = CustomDatatypeUtil2.getDatatype(getAttributeType()).fromReferenceString(getValueReference());
 		}
 		return value;
 	}

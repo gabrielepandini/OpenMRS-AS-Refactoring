@@ -12,10 +12,7 @@ package org.openmrs;
 import java.util.Date;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.openmrs.customdatatype.CustomDatatypeUtil;
-import org.openmrs.customdatatype.CustomValueDescriptor;
-import org.openmrs.customdatatype.NotYetPersistedException;
-import org.openmrs.customdatatype.SingleCustomValue;
+import org.openmrs.customdatatype.*;
 
 /**
  * A FormResource is meant as a way for modules to add arbitrary information to
@@ -232,7 +229,7 @@ public class FormResource extends BaseOpenmrsObject implements CustomValueDescri
 	@Override
 	public Object getValue(){
 		if (typedValue == null) {
-			typedValue = CustomDatatypeUtil.getDatatype(this).fromReferenceString(getValueReference());
+			typedValue = CustomDatatypeUtil2.getDatatype(this).fromReferenceString(getValueReference());
 		}
 		return typedValue;
 	}

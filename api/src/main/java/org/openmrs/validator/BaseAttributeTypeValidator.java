@@ -14,6 +14,7 @@ import org.openmrs.attribute.AttributeType;
 import org.openmrs.customdatatype.CustomDatatype;
 import org.openmrs.customdatatype.CustomDatatypeHandler;
 import org.openmrs.customdatatype.CustomDatatypeUtil;
+import org.openmrs.customdatatype.CustomDatatypeUtil2;
 import org.openmrs.customdatatype.datatype.RegexValidatedTextDatatype;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -68,7 +69,7 @@ public abstract class BaseAttributeTypeValidator<T extends AttributeType<?>> imp
 				errors.rejectValue("datatypeClassname", "error.null");
 			} else {
 				try {
-					CustomDatatype<?> datatype = CustomDatatypeUtil.getDatatype(attributeType);
+					CustomDatatype<?> datatype = CustomDatatypeUtil2.getDatatype(attributeType);
 					if (datatype instanceof RegexValidatedTextDatatype
 					        && StringUtils.isBlank(attributeType.getDatatypeConfig())) {
 						errors.rejectValue("datatypeConfig", "error.null");
@@ -83,7 +84,7 @@ public abstract class BaseAttributeTypeValidator<T extends AttributeType<?>> imp
 			// ensure that handler is suitable for datatype
 			if (StringUtils.isNotEmpty(attributeType.getPreferredHandlerClassname())) {
 				try {
-					CustomDatatype<?> datatype = CustomDatatypeUtil.getDatatype(attributeType);
+					CustomDatatype<?> datatype = CustomDatatypeUtil2.getDatatype(attributeType);
 					CustomDatatypeHandler<?, ?> handler = CustomDatatypeUtil.getHandler(attributeType);
 					if (!CustomDatatypeUtil.isCompatibleHandler(handler, datatype)) {
 						errors.rejectValue("preferredHandlerClassname",

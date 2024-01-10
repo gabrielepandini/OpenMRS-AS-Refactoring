@@ -21,7 +21,6 @@ import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
 import org.openmrs.attribute.Attribute;
 import org.openmrs.attribute.AttributeType;
-import org.openmrs.customdatatype.datatype.FreeTextDatatype;
 import org.openmrs.serialization.SerializationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,55 +37,12 @@ public class CustomDatatypeUtil {
 	
 	private static final Logger log = LoggerFactory.getLogger(CustomDatatypeUtil.class);
 
-	public static final String DEFAULT_CUSTOM_DATATYPE = FreeTextDatatype.class.getName();
-	
-	/**
-	 * @param descriptor
-	 * @return a configured datatype appropriate for descriptor
-	 */
-	public static CustomDatatype<?> getDatatype(CustomValueDescriptor descriptor) {
-		return getDatatype(descriptor.getDatatypeClassname(), descriptor.getDatatypeConfig());
-	}
-	
-	/**
-	 * @param datatypeClassname
-	 * @param datatypeConfig
-	 * @return a configured datatype with the given classname and configuration
-	 */
-	public static CustomDatatype<?> getDatatype(String datatypeClassname, String datatypeConfig) {
-		try {
-			Class dtClass = Context.loadClass(datatypeClassname);
-			CustomDatatype<?> ret = (CustomDatatype<?>) Context.getDatatypeService().getDatatype(dtClass, datatypeConfig);
-			if (ret == null) {
-				throw new CustomDatatypeException("Can't find datatype: " + datatypeClassname);
-			}
-			return ret;
-		}
-		catch (Exception ex) {
-			throw new CustomDatatypeException("Error loading " + datatypeClassname + " and configuring it with "
-			        + datatypeConfig, ex);
-		}
-	}
-	
-	/**
-	 * @param descriptor
-	 * @return a configured datatype appropriate for descriptor
-	 */
-	public static CustomDatatype<?> getDatatypeOrDefault(CustomValueDescriptor descriptor) {
-		try {
-			return getDatatype(descriptor);
-		}
-		catch (CustomDatatypeException ex) {
-			return getDatatype(DEFAULT_CUSTOM_DATATYPE, null);
-		}
-	}
-	
 	/**
 	 * @param descriptor
 	 * @return a configured datatype handler appropriate for descriptor
 	 */
 	public static CustomDatatypeHandler getHandler(CustomValueDescriptor descriptor) {
-		return getHandler(getDatatypeOrDefault(descriptor), descriptor.getPreferredHandlerClassname(), descriptor
+		return getHandler(CustomDatatypeUtil2.getDatatypeOrDefault(descriptor), descriptor.getPreferredHandlerClassname(), descriptor
 		        .getHandlerConfig());
 	}
 	
@@ -172,7 +128,7 @@ public class CustomDatatypeUtil {
 			serializedAttributeValues = new HashMap<>();
 			for (Map.Entry<T, U> e : datatypeValues.entrySet()) {
 				T vat = e.getKey();
-				CustomDatatype<U> customDatatype = (CustomDatatype<U>) getDatatype(vat);
+				CustomDatatype<U> customDatatype = (CustomDatatype<U>) CustomDatatypeUtil2.getDatatype(vat);
 				String valueReference;
 				try {
 					valueReference = customDatatype.getReferenceStringForValue(e.getValue());
@@ -239,7 +195,7 @@ public class CustomDatatypeUtil {
 	 */
 	public static void saveIfDirty(SingleCustomValue<?> value) {
 		if (value.isDirty()) {
-			CustomDatatype datatype = CustomDatatypeUtil.getDatatype(value.getDescriptor());
+			CustomDatatype datatype = CustomDatatypeUtil2.getDatatype(value.getDescriptor());
 			if (value.getValue() == null) {
 				throw new InvalidCustomValueException(value.getClass() + " with type=" + value.getDescriptor()
 				        + " cannot be null");
@@ -266,7 +222,7 @@ public class CustomDatatypeUtil {
 	@SuppressWarnings("unchecked")
 	public static <T, D extends CustomValueDescriptor> boolean validate(SingleCustomValue<D> value) {
 		try {
-			CustomDatatype<T> datatype = (CustomDatatype<T>) getDatatype(value.getDescriptor());
+			CustomDatatype<T> datatype = (CustomDatatype<T>) CustomDatatypeUtil2.getDatatype(value.getDescriptor());
 			datatype.validate((T) value.getValue());
 			return true;
 		}
