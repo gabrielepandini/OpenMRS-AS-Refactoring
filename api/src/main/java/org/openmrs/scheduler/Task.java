@@ -9,7 +9,7 @@
  */
 package org.openmrs.scheduler;
 
-public interface Task {
+public interface Task extends ITask {
 	
 	/**
 	 * Executes the task defined in the task definition.

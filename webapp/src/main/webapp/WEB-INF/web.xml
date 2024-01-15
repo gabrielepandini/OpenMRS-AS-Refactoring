@@ -186,7 +186,7 @@
 	
 	<filter>
 		<filter-name>ModuleFilter</filter-name> 
-		<filter-class>org.openmrs.module.web.filter.ModuleFilter</filter-class> 
+		<filter-class>org.openmrs.module.web.ModuleFilter</filter-class> 
 	</filter>
 	<filter-mapping>
 		<filter-name>ModuleFilter</filter-name> 

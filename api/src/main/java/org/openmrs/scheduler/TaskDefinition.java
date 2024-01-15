@@ -9,6 +9,7 @@
  */
 package org.openmrs.scheduler;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class TaskDefinition extends BaseChangeableOpenmrsMetadata {
 	// This class must implement the schedulable interface or it will fail to start
 	private String taskClass;
 	
-	private Task taskInstance = null;
+	private ITask taskInstance = null;
 	
 	// Scheduling metadata
 	private Date startTime;
@@ -72,7 +73,70 @@ public class TaskDefinition extends BaseChangeableOpenmrsMetadata {
 		setDescription(description);
 		this.taskClass = taskClass;
 	}
-	
+
+	/**
+	 * Gets the next execution time based on the initial start time (possibly years ago, depending
+	 * on when the task was configured in OpenMRS) and the repeat interval of execution. We need to
+	 * calculate the "next execution time" because the scheduled time is most likely in the past and
+	 * the JDK timer will run the task X number of times from the start time until now in order to
+	 * catch up. The assumption is that this is not the desired behavior -- we just want to execute
+	 * the task on its next execution time. For instance, say we had a scheduled task that ran every
+	 * 24 hours at midnight. In the database, the task would likely have a past start date (e.g.
+	 * 04/01/2006 12:00am). If we scheduled the task using the JDK Timer
+	 * scheduleAtFixedRate(TimerTask task, Date startDate, int interval) method and passed in the
+	 * start date above, the JDK Timer would execute this task once for every day between the start
+	 * date and today, which would lead to hundreds of unnecessary (and likely expensive)
+	 * executions.
+	 * 
+	 * @see java.util.Timer
+	 * @param taskDefinition the task definition to be executed
+	 * @return the next "future" execution time for the given task
+	 * <strong>Should</strong> get the correct repeat interval
+	 */
+	public static Date getNextExecution(TaskDefinition taskDefinition) {
+		Calendar nextTime = Calendar.getInstance();
+		
+		try {
+			Date firstTime = taskDefinition.getStartTime();
+			
+			if (firstTime != null) {
+				
+				// Right now
+				Date currentTime = new Date();
+				
+				// If the first time is actually in the future, then we use that date/time
+				if (firstTime.after(currentTime)) {
+					return firstTime;
+				}
+				
+				// The time between successive runs (e.g. 24 hours)
+				long repeatInterval = taskDefinition.getRepeatInterval();
+				if (repeatInterval == 0) {
+					// task is one-shot so just return the start time
+					return firstTime;
+				}
+				
+				// Calculate time between the first time the process was run and right now (e.g. 3 days, 15 hours)
+				long betweenTime = currentTime.getTime() - firstTime.getTime();
+				
+				// Calculate the last time the task was run   (e.g. 15 hours ago)
+				long lastTime = (betweenTime % (repeatInterval * 1000));
+				
+				// Calculate the time to add to the current time (e.g. 24 hours - 15 hours = 9 hours)
+				long additional = ((repeatInterval * 1000) - lastTime);
+				
+				nextTime.setTime(new Date(currentTime.getTime() + additional));
+				
+				log.debug("The task " + taskDefinition.getName() + " will start at " + nextTime.getTime());
+			}
+		}
+		catch (Exception e) {
+			log.error("Failed to get next execution time for " + taskDefinition.getName(), e);
+		}
+		
+		return nextTime.getTime();
+	}
+
 	/**
 	 * Get the task identifier.
 	 * 
@@ -253,7 +317,7 @@ public class TaskDefinition extends BaseChangeableOpenmrsMetadata {
 	 * @return the <code>Date</code> of the next execution
 	 */
 	public Date getNextExecutionTime() {
-		return SchedulerUtil.getNextExecution(this);
+		return getNextExecution(this);
 	}
 	
 	/**
@@ -280,10 +344,10 @@ public class TaskDefinition extends BaseChangeableOpenmrsMetadata {
 	
 	/**
 	 * Gets the runnable task instance associated with this definition.
-	 * 
+	 *
 	 * @return related task, or null if none instantiated (definition hasn't been scheduled)
 	 */
-	public Task getTaskInstance() {
+	public ITask getTaskInstance() {
 		return taskInstance;
 	}
 	
@@ -293,7 +357,7 @@ public class TaskDefinition extends BaseChangeableOpenmrsMetadata {
 	 * 
 	 * @param taskInstance
 	 */
-	public void setTaskInstance(Task taskInstance) {
+	public void setTaskInstance(ITask taskInstance) {
 		this.taskInstance = taskInstance;
 	}
 }

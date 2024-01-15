@@ -22,7 +22,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.openmrs.module.Module;
 import org.openmrs.module.ModuleException;
-import org.openmrs.module.web.filter.ModuleFilterDefinition;
+import org.openmrs.module.web.ModuleFilterDefinition;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 

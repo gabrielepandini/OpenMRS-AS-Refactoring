@@ -51,7 +51,7 @@ import org.openmrs.hl7.HL7Source;
 import org.openmrs.hl7.HL7Util;
 import org.openmrs.hl7.Hl7InArchivesMigrateThread;
 import org.openmrs.hl7.Hl7InArchivesMigrateThread.Status;
-import org.openmrs.hl7.db.HL7DAO;
+import org.openmrs.hl7.HL7DAO;
 import org.openmrs.util.OpenmrsConstants;
 import org.openmrs.util.OpenmrsUtil;
 import org.openmrs.util.PrivilegeConstants;
@@ -116,7 +116,7 @@ public class HL7ServiceImpl extends BaseOpenmrsService implements HL7Service {
 	}
 	
 	/**
-	 * @see org.openmrs.hl7.HL7Service#setHL7DAO(org.openmrs.hl7.db.HL7DAO)
+	 * @see org.openmrs.hl7.HL7Service#setHL7DAO(HL7DAO)
 	 */
 	@Override
 	public void setHL7DAO(HL7DAO dao) {

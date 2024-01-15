@@ -27,7 +27,6 @@ import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.scheduler.SchedulerConstants;
 import org.openmrs.scheduler.SchedulerException;
 import org.openmrs.scheduler.SchedulerService;
-import org.openmrs.scheduler.SchedulerUtil;
 import org.openmrs.scheduler.Task;
 import org.openmrs.scheduler.TaskDefinition;
 import org.openmrs.scheduler.TaskFactory;
@@ -236,7 +235,7 @@ public class TimerSchedulerServiceImpl extends BaseOpenmrsService implements Sch
 					if (taskDefinition.getStartTime() != null) {
 						// Need to calculate the "next execution time" because the scheduled time is most likely in the past
 						// and the JDK timer will run the task X number of times from the start time until now to catch up.
-						Date nextTime = SchedulerUtil.getNextExecution(taskDefinition);
+						Date nextTime = TaskDefinition.getNextExecution(taskDefinition);
 						
 						// Start task at fixed rate at given future date and repeat as directed 							
 						log.info("Starting task ... the task will execute for the first time at " + nextTime);
@@ -521,7 +520,7 @@ public class TimerSchedulerServiceImpl extends BaseOpenmrsService implements Sch
 	
 	@Override
 	public void scheduleIfNotRunning(TaskDefinition taskDef) {
-		Task task = taskDef.getTaskInstance();
+		Task task = (Task) taskDef.getTaskInstance();
 		if (task == null) {
 			try {
 				scheduleTask(taskDef);

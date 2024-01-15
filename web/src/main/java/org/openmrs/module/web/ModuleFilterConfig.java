@@ -7,7 +7,7 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.module.web.filter;
+package org.openmrs.module.web;
 
 import java.util.Collections;
 import java.util.Enumeration;

@@ -196,7 +196,7 @@
 	<bean id="alertDAO" class="org.openmrs.notification.db.hibernate.HibernateAlertDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-	<bean id="hL7DAO" class="org.openmrs.hl7.db.hibernate.HibernateHL7DAO">
+	<bean id="hL7DAO" class="org.openmrs.hl7.HibernateHL7DAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	<bean id="visitDAO" class="org.openmrs.api.db.hibernate.HibernateVisitDAO">

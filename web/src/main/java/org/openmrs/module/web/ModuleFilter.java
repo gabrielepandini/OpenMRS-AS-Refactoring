@@ -7,7 +7,7 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.module.web.filter;
+package org.openmrs.module.web;
 
 import java.io.IOException;
 
@@ -18,7 +18,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.openmrs.module.web.WebModuleUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

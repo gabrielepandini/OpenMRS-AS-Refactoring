@@ -21,7 +21,7 @@ public class SchedulerUtilTest {
 	/**
 	 * Tests whether the scheduler is handing out the correct execution times for tasks.
 	 * 
-	 * @see SchedulerUtil#getNextExecution(TaskDefinition)
+	 * @see TaskDefinition#getNextExecution(TaskDefinition)
 	 */
 	@Test
 	public void getNextExecution_shouldGetTheCorrectRepeatInterval() {
@@ -41,7 +41,7 @@ public class SchedulerUtilTest {
 		startTime.add(Calendar.MINUTE, 4);
 		
 		// Get the next scheduled execution time for this task 
-		Date nextTime = SchedulerUtil.getNextExecution(taskDefinition);
+		Date nextTime = TaskDefinition.getNextExecution(taskDefinition);
 		
 		// Assert that the next execution time is equal to startTime + 4 minutes
 		assertEquals(startTime.getTime(), nextTime);
