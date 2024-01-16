@@ -20,7 +20,6 @@ import org.openmrs.Concept;
 import org.openmrs.ConceptDatatype;
 import org.openmrs.Obs;
 import org.openmrs.api.context.Context;
-import org.openmrs.logic.LogicException;
 
 /**
  * A result from the logic service. A result can be 0-to-n date-values pairs. You can treat the

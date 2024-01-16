@@ -29,7 +29,7 @@ import org.openmrs.scheduler.SchedulerException;
 import org.openmrs.scheduler.SchedulerService;
 import org.openmrs.scheduler.Task;
 import org.openmrs.scheduler.TaskDefinition;
-import org.openmrs.scheduler.TaskFactory;
+import org.openmrs.scheduler.tasks.TaskFactory;
 import org.openmrs.scheduler.db.SchedulerDAO;
 import org.openmrs.util.OpenmrsMemento;
 import org.slf4j.Logger;

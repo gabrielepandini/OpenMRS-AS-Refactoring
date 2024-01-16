@@ -16,6 +16,7 @@ import java.util.Map;
 import org.openmrs.Cohort;
 import org.openmrs.Patient;
 import org.openmrs.logic.datasource.LogicDataSource;
+import org.openmrs.logic.result.LogicException;
 import org.openmrs.logic.result.Result;
 
 /**

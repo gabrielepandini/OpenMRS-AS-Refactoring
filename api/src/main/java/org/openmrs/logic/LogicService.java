@@ -15,6 +15,7 @@ import java.util.Set;
 
 import org.openmrs.Cohort;
 import org.openmrs.logic.datasource.LogicDataSource;
+import org.openmrs.logic.result.LogicException;
 import org.openmrs.logic.result.Result;
 import org.openmrs.logic.result.Result.Datatype;
 import org.openmrs.logic.rule.RuleParameterInfo;

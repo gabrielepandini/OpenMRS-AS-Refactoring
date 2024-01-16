@@ -15,7 +15,6 @@ import org.openmrs.User;
 import org.openmrs.annotation.Authorized;
 import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
-import org.openmrs.notification.db.AlertDAO;
 import org.openmrs.util.PrivilegeConstants;
 
 /**

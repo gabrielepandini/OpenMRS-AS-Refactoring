@@ -22,7 +22,7 @@ import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.notification.Alert;
 import org.openmrs.notification.AlertRecipient;
 import org.openmrs.notification.AlertService;
-import org.openmrs.notification.db.AlertDAO;
+import org.openmrs.notification.AlertDAO;
 import org.openmrs.util.RoleConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +49,7 @@ public class AlertServiceImpl extends BaseOpenmrsService implements Serializable
 	}
 	
 	/**
-	 * @see org.openmrs.notification.AlertService#setAlertDAO(org.openmrs.notification.db.AlertDAO)
+	 * @see org.openmrs.notification.AlertService#setAlertDAO(AlertDAO)
 	 */
 	@Override
 	public void setAlertDAO(AlertDAO dao) {

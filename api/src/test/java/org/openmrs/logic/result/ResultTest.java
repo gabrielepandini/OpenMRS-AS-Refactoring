@@ -22,7 +22,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.openmrs.Encounter;
 import org.openmrs.api.context.Context;
-import org.openmrs.logic.LogicException;
 
 /**
  * Tests all methods on the {@link Result} object

@@ -12,6 +12,7 @@ package org.openmrs.logic;
 import java.util.Map;
 import java.util.Set;
 
+import org.openmrs.logic.result.LogicException;
 import org.openmrs.logic.result.Result;
 import org.openmrs.logic.result.Result.Datatype;
 import org.openmrs.logic.rule.RuleParameterInfo;

@@ -7,9 +7,11 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.scheduler;
+package org.openmrs.scheduler.tasks;
 
-import org.openmrs.scheduler.tasks.TaskThreadedInitializationWrapper;
+import org.openmrs.scheduler.SchedulerException;
+import org.openmrs.scheduler.Task;
+import org.openmrs.scheduler.TaskDefinition;
 import org.openmrs.util.OpenmrsClassLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

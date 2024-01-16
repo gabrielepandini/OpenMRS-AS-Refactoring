@@ -20,7 +20,7 @@ import org.hibernate.criterion.Restrictions;
 import org.openmrs.User;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.notification.Alert;
-import org.openmrs.notification.db.AlertDAO;
+import org.openmrs.notification.AlertDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +49,7 @@ public class HibernateAlertDAO implements AlertDAO {
 	}
 	
 	/**
-	 * @see org.openmrs.notification.db.AlertDAO#saveAlert(org.openmrs.notification.Alert)
+	 * @see AlertDAO#saveAlert(org.openmrs.notification.Alert)
 	 */
 	@Override
 	public Alert saveAlert(Alert alert) throws DAOException {
@@ -58,7 +58,7 @@ public class HibernateAlertDAO implements AlertDAO {
 	}
 	
 	/**
-	 * @see org.openmrs.notification.db.AlertDAO#getAlert(java.lang.Integer)
+	 * @see AlertDAO#getAlert(java.lang.Integer)
 	 */
 	@Override
 	public Alert getAlert(Integer alertId) throws DAOException {
@@ -66,7 +66,7 @@ public class HibernateAlertDAO implements AlertDAO {
 	}
 	
 	/**
-	 * @see org.openmrs.notification.db.AlertDAO#deleteAlert(org.openmrs.notification.Alert)
+	 * @see AlertDAO#deleteAlert(org.openmrs.notification.Alert)
 	 */
 	@Override
 	public void deleteAlert(Alert alert) throws DAOException {
@@ -90,7 +90,7 @@ public class HibernateAlertDAO implements AlertDAO {
 	}
 	
 	/**
-	 * @see org.openmrs.notification.db.AlertDAO#getAlerts(org.openmrs.User, boolean, boolean)
+	 * @see AlertDAO#getAlerts(org.openmrs.User, boolean, boolean)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
