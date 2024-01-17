@@ -15,7 +15,7 @@ import java.util.TimerTask;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.context.Daemon;
 import org.openmrs.scheduler.SchedulerService;
-import org.openmrs.scheduler.SchedulerUtil;
+import org.openmrs.module.SchedulerUtil;
 import org.openmrs.scheduler.Task;
 import org.openmrs.scheduler.TaskDefinition;
 import org.slf4j.Logger;

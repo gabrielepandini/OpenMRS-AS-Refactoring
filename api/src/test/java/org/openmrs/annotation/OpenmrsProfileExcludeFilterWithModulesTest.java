@@ -12,6 +12,7 @@ package org.openmrs.annotation;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import org.openmrs.module.OpenmrsProfileExcludeFilter;
 import org.openmrs.test.jupiter.BaseContextSensitiveTest;
 import org.openmrs.test.StartModule;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;

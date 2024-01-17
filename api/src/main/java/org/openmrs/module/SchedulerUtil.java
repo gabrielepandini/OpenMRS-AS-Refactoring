@@ -7,7 +7,7 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.scheduler;
+package org.openmrs.module;
 
 import java.util.Map;
 import java.util.Properties;
@@ -15,6 +15,8 @@ import java.util.Properties;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
+import org.openmrs.scheduler.SchedulerConstants;
+import org.openmrs.scheduler.SchedulerService;
 import org.openmrs.util.PrivilegeConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

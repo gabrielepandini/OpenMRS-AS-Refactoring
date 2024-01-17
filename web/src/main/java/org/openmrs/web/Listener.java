@@ -17,7 +17,7 @@ import org.openmrs.module.*;
 import org.openmrs.module.Module;
 import org.openmrs.module.web.OpenmrsJspServlet;
 import org.openmrs.module.web.WebModuleUtil;
-import org.openmrs.scheduler.SchedulerUtil;
+import org.openmrs.module.SchedulerUtil;
 import org.openmrs.util.DatabaseUpdateException;
 import org.openmrs.util.DatabaseUpdater;
 import org.openmrs.util.InputRequiredException;

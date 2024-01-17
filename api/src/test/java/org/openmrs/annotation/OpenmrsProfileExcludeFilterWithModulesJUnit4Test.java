@@ -12,6 +12,7 @@ package org.openmrs.annotation;
 import static org.junit.Assert.assertThrows;
 
 import org.junit.Test;
+import org.openmrs.module.OpenmrsProfileExcludeFilter;
 import org.openmrs.test.BaseContextSensitiveTest;
 import org.openmrs.test.StartModule;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;

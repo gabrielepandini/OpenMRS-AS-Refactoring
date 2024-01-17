@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import org.openmrs.module.OpenmrsProfileIncludeFilter;
 import org.openmrs.test.jupiter.BaseContextSensitiveTest;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.core.type.classreading.MetadataReader;
